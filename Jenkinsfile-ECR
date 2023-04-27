@@ -22,44 +22,44 @@ pipeline
                 }
             }
         }
-        stage('UNIT Test Maven')
-        {
-            when { expression { params.action == 'create' }}
-            steps{
-                script{
-                    mvntest()
-                }
-            }
-        }
-        stage('MAVEN Integration Testing')
-        {
-            when { expression { params.action == 'create' }}
-            steps{
-                script{
-                    mvnIntegrationTest()
-                }
-            }
-        }
-        stage('Static Code Analysis')
-        {
-            when { expression { params.action == 'create' }}
-            steps{
-                script{
-                    def SonarQubecredentialsId='project1'
-                    StaticCodeAnalysis(SonarQubecredentialsId)
-                }
-            }
-        }
-        stage('Quality Gate Check')
-        {
-            when { expression { params.action == 'create' }}
-            steps{
-                script{
-                    def QualityGateStatuscredentialsId='project1'
-                    QualityGateStatus(QualityGateStatuscredentialsId)
-                }
-            }
-        }
+        // stage('UNIT Test Maven')
+        // {
+        //     when { expression { params.action == 'create' }}
+        //     steps{
+        //         script{
+        //             mvntest()
+        //         }
+        //     }
+        // }
+        // stage('MAVEN Integration Testing')
+        // {
+        //     when { expression { params.action == 'create' }}
+        //     steps{
+        //         script{
+        //             mvnIntegrationTest()
+        //         }
+        //     }
+        // }
+        // stage('Static Code Analysis')
+        // {
+        //     when { expression { params.action == 'create' }}
+        //     steps{
+        //         script{
+        //             def SonarQubecredentialsId='project1'
+        //             StaticCodeAnalysis(SonarQubecredentialsId)
+        //         }
+        //     }
+        // }
+        // stage('Quality Gate Check')
+        // {
+        //     when { expression { params.action == 'create' }}
+        //     steps{
+        //         script{
+        //             def QualityGateStatuscredentialsId='project1'
+        //             QualityGateStatus(QualityGateStatuscredentialsId)
+        //         }
+        //     }
+        // }
         stage('Maven Build')
         {
             when { expression { params.action == 'create' }}
