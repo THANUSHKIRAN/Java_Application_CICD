@@ -2,6 +2,13 @@
 pipeline
 {
     agent any
+    environment {
+        AWS_ACCOUNT_ID="371078282635"
+        AWS_DEFAULT_REGION="east-west-2"
+        IMAGE_REPO_NAME="springboot"
+        IMAGE_TAG="latest"
+        REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
+    }
     parameters{
         choice(name: 'action', choices: 'create\ndelete',description: 'Choose Create/Destroy')
         string(name: 'aws_acc_id', description: "Name of AWS Account ID" ,defaultValue: '371078282635')
@@ -60,6 +67,14 @@ pipeline
         //         }
         //     }
         // }
+        stage('Logging into AWS ECR') {
+            steps {
+                script {
+                sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+                }
+                 
+            }
+        }
         stage('Maven Build')
         {
             when { expression { params.action == 'create' }}
