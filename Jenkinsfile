@@ -4,9 +4,9 @@ pipeline
     agent any
     parameters{
         choice(name: 'action', choices: 'create\ndelete',description: 'Choose Create/Destroy')
-        string(name: 'ImageName', description: "Name of the docker build" ,defaultvalue: 'JavaCICDApp')
-        string(name: 'ImageTag', description: "Tag of the docker build" ,defaultvalue: 'v1')
-        string(name: 'UserName', description: "Name of the User" ,defaultvalue: 'springboot')
+        string(name: 'ImageName', description: "Name of the docker build" ,defaultValue: 'JavaCICDApp')
+        string(name: 'ImageTag', description: "Tag of the docker build" ,defaultValue: 'v1')
+        string(name: 'UserName', description: "Name of the User" ,defaultValue: 'springboot')
     }
     stages
     {
