@@ -42,7 +42,7 @@ pipeline
             when { expression { params.action == 'create' }}
             steps{
                 script{
-                    def SonarQubecredentialsId='sonar-api'
+                    def SonarQubecredentialsId='project1'
                     StaticCodeAnalysis(SonarQubecredentialsId)
                 }
             }
@@ -52,7 +52,7 @@ pipeline
             when { expression { params.action == 'create' }}
             steps{
                 script{
-                    def QualityGateStatuscredentialsId='sonar-api'
+                    def QualityGateStatuscredentialsId='project1'
                     QualityGateStatus(QualityGateStatuscredentialsId)
                 }
             }
