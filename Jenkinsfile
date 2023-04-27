@@ -22,15 +22,15 @@ pipeline
                 }
             }
         }
-        stage('UNIT Test Maven')
-        {
-            when { expression { params.action == 'create' }}
-            steps{
-                script{
-                    mvntest()
-                }
-            }
-        }
+        // stage('UNIT Test Maven')
+        // {
+        //     when { expression { params.action == 'create' }}
+        //     steps{
+        //         script{
+        //             mvntest()
+        //         }
+        //     }
+        // }
         // stage('MAVEN Integration Testing')
         // {
         //     when { expression { params.action == 'create' }}
@@ -93,6 +93,18 @@ pipeline
             }
         }
 
+        stage('Docker Image Push to Docker Hub')
+        {
+            when { expression { params.action == 'create' }}
+            steps{
+                script{
+                    
+                    dockerImagePush("${params.ImageName}","${params.ImageTag}","${params.UserName}")
+                }
+            }
+        }
+
     }
 }
+
 
