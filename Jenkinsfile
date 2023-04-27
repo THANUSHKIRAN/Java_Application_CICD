@@ -21,7 +21,7 @@ pipeline
         }
         stage('UNIT Test Maven')
         {
-            when { expression { param.action == 'create' }}
+            when { expression { params.action == 'create' }}
             steps{
                 script{
                     mvntest()
